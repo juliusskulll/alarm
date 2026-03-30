@@ -11,11 +11,9 @@ async function checkSite() {
     if (text.includes("online")) {
       console.log("🔥 ONLINE!");
 
-      if (webhook) {
-        await axios.post(webhook, {
-          content: "@WAKE ME UP FN 🚨 FNQUEUE IS ONLINE!"
-        });
-      }
+      await axios.post(webhook, {
+        content: "@WAKE ME UP FN 🚨 FNQUEUE IS ONLINE!"
+      });
 
       process.exit(1);
     }
