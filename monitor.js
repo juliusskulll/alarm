@@ -28,7 +28,7 @@ async function run() {
       console.log("🔥 FNQUEUE IS ONLINE!");
 
       await axios.post(WEBHOOK, {
-        content: "@WAKE ME UP 🚨 FNQUEUE IS ONLINE!"
+        content: "@WAKE ME UP FN 🚨 FNQUEUE IS ONLINE!"
       });
 
       console.log("✅ Message sent to Discord");
