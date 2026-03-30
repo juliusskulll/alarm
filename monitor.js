@@ -1,25 +1,28 @@
 const axios = require("axios");
 
 const url = "https://fnqueue.com/";
+const webhook = process.env.DISCORD_WEBHOOK;
 
 async function checkSite() {
   try {
     const res = await axios.get(url);
     const text = res.data.toLowerCase();
 
-    console.log("Checking site...");
-
     if (text.includes("online")) {
-      console.log("🔥 FNQUEUE IS ONLINE!");
+      console.log("🔥 ONLINE!");
 
-      // Force GitHub Action to fail (so you get notified)
+      if (webhook) {
+        await axios.post(webhook, {
+          content: "@WAKE ME UP FN 🚨 FNQUEUE IS ONLINE!"
+        });
+      }
+
       process.exit(1);
-    } else {
-      console.log("Still offline...");
     }
 
+    console.log("Still offline...");
   } catch (err) {
-    console.error("Error:", err.message);
+    console.error(err.message);
     process.exit(1);
   }
 }
