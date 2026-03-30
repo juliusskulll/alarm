@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FNQueue Alert</title>
+</head>
+<body>
+  <h1>FNQueue Monitor</h1>
+  <p id="status">Checking...</p>
+
+  <audio id="alarm" loop>
+    <source src="https://www.soundjay.com/alarm/alarm-clock-01.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const url = "https://fnqueue.com/";
+    const interval = 5000; // check every 5 seconds
+
+    async function checkSite() {
+      try {
+        const response = await fetch(url);
+        const text = await response.text();
+
+        if (text.toLowerCase().includes("online")) {
+          document.getElementById("status").innerText = "🔥 ONLINE!";
+          document.getElementById("alarm").play();
+          alert("FNQUEUE IS ONLINE!");
+        } else {
+          document.getElementById("status").innerText = "Still offline...";
+        }
+      } catch (e) {
+        document.getElementById("status").innerText = "Error checking site";
+      }
+    }
+
+    setInterval(checkSite, interval);
+    checkSite();
+  </script>
+</body>
+</html>
